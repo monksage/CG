@@ -1,7 +1,7 @@
 """
 MCGK configuration — all settings via environment variables.
 
-MCGK_PORT              – HTTP port (default 6245)
+MCGK_PORT              – HTTP port (default 39050)
 MCGK_HOST              – Bind address (default 0.0.0.0)
 MCGK_DB_PATH           – SQLite database path (default ./mcgk.db)
 MCGK_HEALTH_INTERVAL   – Health-check interval in seconds (default 10)
@@ -21,7 +21,7 @@ def _bool(val: str) -> bool:
     return val.lower() in ("1", "true", "yes")
 
 
-PORT: int = int(os.getenv("MCGK_PORT", "6245"))
+PORT: int = int(os.getenv("MCGK_PORT", "39050"))
 HOST: str = os.getenv("MCGK_HOST", "0.0.0.0")
 DB_PATH: Path = Path(os.getenv("MCGK_DB_PATH", "mcgk.db"))
 HEALTH_INTERVAL: int = int(os.getenv("MCGK_HEALTH_INTERVAL", "10"))

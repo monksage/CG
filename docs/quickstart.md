@@ -4,7 +4,7 @@ This guide shows how to build a contour (service) that registers with MCGK, beco
 
 ## Prerequisites
 
-- MCGK is running (default: `http://localhost:6245`)
+- MCGK is running (default: `http://localhost:39050`)
 - Your contour is an HTTP server (any language/framework)
 
 ## Step 1: Build your service
@@ -35,7 +35,7 @@ def greet(data: dict):
 On startup (or manually), POST your passport to MCGK:
 
 ```bash
-curl -X POST http://localhost:6245/register \
+curl -X POST http://localhost:39050/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "greeter",
@@ -65,7 +65,7 @@ Response: `{"status": "registered", "name": "greeter"}`
 ## Step 3: Verify discovery
 
 ```bash
-curl http://localhost:6245/discover/greeter
+curl http://localhost:39050/discover/greeter
 ```
 
 Your passport is now available to anyone who asks. Note: no address in the response.
@@ -75,7 +75,7 @@ Your passport is now available to anyone who asks. Note: no address in the respo
 Other contours (or external clients) call you through MCGK:
 
 ```bash
-curl -X POST http://localhost:6245/route/greeter/greet \
+curl -X POST http://localhost:39050/route/greeter/greet \
   -H "Content-Type: application/json" \
   -d '{"name": "Alice"}'
 ```
@@ -88,13 +88,13 @@ To interact with another contour:
 
 ```bash
 # 1. See what's available
-curl http://localhost:6245/map
+curl http://localhost:39050/map
 
 # 2. Learn a specific contour's interface
-curl http://localhost:6245/discover/other-service
+curl http://localhost:39050/discover/other-service
 
 # 3. Adapt your request to match its schema, then route through MCGK
-curl -X POST http://localhost:6245/route/other-service/endpoint \
+curl -X POST http://localhost:39050/route/other-service/endpoint \
   -H "Content-Type: application/json" \
   -d '{"field": "value"}'
 ```
@@ -117,7 +117,7 @@ curl -X POST http://localhost:6245/route/other-service/endpoint \
 ```python
 import httpx
 
-MCGK = "http://localhost:6245"
+MCGK = "http://localhost:39050"
 
 passport = {
     "name": "greeter",
